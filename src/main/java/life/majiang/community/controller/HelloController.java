@@ -2,6 +2,7 @@ package life.majiang.community.controller;
 
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +18,18 @@ public class HelloController {
    @Autowired
    private UserMapper userMapper;
     @GetMapping
-    public String Index (HttpServletRequest request, HttpServletResponse response){
+    public String Index (@NotNull HttpServletRequest request, HttpServletResponse response){
         Cookie[] cookies=request.getCookies();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("token")){
-                String token=cookie.getValue();
-                User user = userMapper.findByToken(token);
-                if(user !=null){
-                    request.getSession().setAttribute("user",user);
+        if(cookies!=null&&cookies.length>0) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    User user = userMapper.findByToken(token);
+                    if (user != null) {
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
                 }
-                break;
             }
         }
 

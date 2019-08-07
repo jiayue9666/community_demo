@@ -6,6 +6,7 @@ import life.majiang.community.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.io.IOException;
 
 @Component
