@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class HelloController {
+public class IndexController {
    @Autowired
    private UserMapper userMapper;
     @GetMapping
